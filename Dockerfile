@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-LABEL author="Abdul Pasaribu <abdoelrachmad@gmail.com>"
+LABEL maintainer "Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Ubuntu specific: set timezone during build
 ARG TZ Asia/Jakarta

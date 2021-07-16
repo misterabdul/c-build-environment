@@ -1,13 +1,19 @@
-FROM fedora:34
+FROM debian:10.9
 
 LABEL author="Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Update all current packages
-RUN dnf update -y
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -qq apt-utils && \
+	DEBIAN_FRONTEND=noninteractive apt-get -qq upgrade
 
 # Install all necessary packages
-RUN dnf install -y git \
-	cmake vim zsh wget zip
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq git curl openssh-client \
+	cmake vim zsh wget zip python python3
+
+# Debian specific: change default python to python3
+RUN update-alternatives --install $(which python) python $(which python3) 0
 
 # Install all related C development tools & libraries
-RUN dnf group install -y "C Development Tools and Libraries"
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq autoconf automake binutils \
+	bison flex gcc g++ gdb libc-dev libtool make pkgconf strace byacc ccache cscope \
+	ctags elfutils indent ltrace linux-perf valgrind cmake

@@ -1,6 +1,6 @@
 FROM opensuse/leap:15.2
 
-LABEL author="Abdul Pasaribu <abdoelrachmad@gmail.com>"
+LABEL maintainer "Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Update all current packages
 RUN zypper ref && zypper up

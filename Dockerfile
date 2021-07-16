@@ -1,13 +1,17 @@
-FROM fedora:34
+FROM opensuse/leap:15.2
 
 LABEL author="Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Update all current packages
-RUN dnf update -y
+RUN zypper ref && zypper up
 
 # Install all necessary packages
-RUN dnf install -y git \
+RUN zypper in -y git curl which python3 \
 	cmake vim zsh wget zip
 
+# openSUSE specific: create symlink to python3
+RUN ln -s $(which python3) /usr/bin/python
+
 # Install all related C development tools & libraries
-RUN dnf group install -y "C Development Tools and Libraries"
+RUN zypper in -y -t pattern "devel_C_C++" && \
+	zypper in -y gcc-c++

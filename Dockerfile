@@ -1,6 +1,6 @@
 FROM fedora:34
 
-LABEL author="Abdul Pasaribu <abdoelrachmad@gmail.com>"
+LABEL maintainer "Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Update all current packages
 RUN dnf update -y

@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 LABEL maintainer "Abdul Pasaribu <abdoelrachmad@gmail.com>"
 
 # Ubuntu specific: set timezone during build
-ARG TZ Asia/Jakarta
+ARG TZ=Asia/Jakarta
 
 # Update all current packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -qq apt-utils locales && \

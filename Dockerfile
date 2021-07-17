@@ -25,3 +25,15 @@ RUN update-alternatives --install $(which python) python $(which python3) 0
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq autoconf automake binutils \
 	bison flex gcc g++ gdb libc-dev libtool make pkgconf strace byacc ccache cscope \
 	ctags elfutils indent ltrace linux-tools-generic valgrind cmake
+
+# Install sudo
+RUN DEBIAN_FRONTEND=noninteractive apt-get install sudo
+
+# Create c builder user account and add to wheel group
+RUN useradd --create-home c-builder-ci && \
+	usermod --append --groups sudo c-builder-ci && \
+	sed -i 's/\(^%sudo.*ALL=(ALL:ALL).*\)\(ALL$\)/\1 NOPASSWD: \2/g' /etc/sudoers
+
+# Change to that user
+USER c-builder-ci
+WORKDIR /home/c-builder-ci

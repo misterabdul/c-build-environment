@@ -13,7 +13,7 @@ RUN dnf install -y git \
 RUN dnf group install --with-optional -y "C Development Tools and Libraries"
 
 # Install sudo
-RUN dnf install sudo
+RUN dnf install -y sudo
 
 # Create c builder user account and add to wheel group
 RUN useradd --create-home c-builder-ci && \
